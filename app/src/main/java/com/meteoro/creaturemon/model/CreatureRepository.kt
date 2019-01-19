@@ -1,3 +1,9 @@
 package com.meteoro.creaturemon.model
 
-interface CreatureRepository
+import android.arch.lifecycle.LiveData
+
+interface CreatureRepository {
+    fun saveCreature(creature: Creature)
+    fun getAllCreaatures(): LiveData<List<Creature>>
+    fun clearAllCreatures()
+}
