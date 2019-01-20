@@ -4,6 +4,7 @@ import android.arch.core.executor.testing.InstantTaskExecutorRule
 import com.meteoro.creaturemon.model.Creature
 import com.meteoro.creaturemon.model.CreatureAttributes
 import com.meteoro.creaturemon.model.CreatureGenerator
+import com.meteoro.creaturemon.model.CreatureRepository
 import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -23,10 +24,13 @@ class CreatureViewModelTest {
     @Mock
     lateinit var mockGenerator: CreatureGenerator
 
+    @Mock
+    lateinit var repository: CreatureRepository
+
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-        creatureViewModel = CreatureViewModel(mockGenerator)
+        creatureViewModel = CreatureViewModel(mockGenerator, repository)
     }
 
     @Test
@@ -42,5 +46,16 @@ class CreatureViewModelTest {
         creatureViewModel.updateCreature()
 
         assertEquals(stubCreature, creatureViewModel.creature)
+    }
+
+    @Test
+    fun testCantSaveCreatureWithBlankName() {
+        creatureViewModel.intelligence = 10
+        creatureViewModel.strength = 3
+        creatureViewModel.endurance = 7
+        creatureViewModel.drawable = 1
+        creatureViewModel.name = ""
+        val canSaveCreature = creatureViewModel.canSaveCreature()
+        assertEquals(false, canSaveCreature)
     }
 }

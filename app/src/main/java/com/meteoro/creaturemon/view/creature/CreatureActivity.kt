@@ -9,6 +9,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.meteoro.creaturemon.R
 import com.meteoro.creaturemon.model.AttributeStore
 import com.meteoro.creaturemon.model.AttributeType
@@ -96,7 +97,12 @@ class CreatureActivity : AppCompatActivity(), AvatarAdapter.AvatarListener {
         }
 
         saveButton.setOnClickListener {
-            // TODO: handle save button clicked
+            if (viewModel.saveCreature()) {
+                Toast.makeText(this, getString(R.string.creature_saved), Toast.LENGTH_SHORT).show()
+                finish()
+            } else {
+                Toast.makeText(this, getString(R.string.error_saving_creature), Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
