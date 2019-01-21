@@ -6,7 +6,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.meteoro.creaturemon"
+        applicationId 'com.meteoro.creaturemon.mvvm'
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
@@ -22,27 +22,25 @@ android {
     dataBinding {
         enabled = true
     }
+    productFlavors {
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$support_version"
     implementation "com.android.support:design:$support_version"
     implementation "com.android.support:recyclerview-v7:$support_version"
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-
     // Room
     implementation "android.arch.persistence.room:runtime:$room_version"
     annotationProcessor "android.arch.persistence.room:compiler:$room_version"
     kapt "android.arch.persistence.room:compiler:$room_version"
-
     // ViewModel and LiveData
     implementation "android.arch.lifecycle:extensions:$arch_comp_version"
-
     testImplementation 'junit:junit:4.12'
-    testImplementation "org.mockito:mockito-core:2.17.0"
+    testImplementation 'org.mockito:mockito-core:2.17.0'
     testImplementation "android.arch.core:core-testing:$arch_comp_version"
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
