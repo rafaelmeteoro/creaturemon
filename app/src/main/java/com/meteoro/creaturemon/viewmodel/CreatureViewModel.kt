@@ -3,6 +3,7 @@ package com.meteoro.creaturemon.viewmodel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import android.databinding.ObservableField
 import com.meteoro.creaturemon.model.*
 import com.meteoro.creaturemon.model.room.RoomRepository
 
@@ -19,7 +20,7 @@ class CreatureViewModel(
 
     fun getSaveLiveData(): LiveData<Boolean> = saveLiveData
 
-    var name = ""
+    var name = ObservableField<String>("")
     var intelligence = 0
     var strength = 0
     var endurance = 0
@@ -29,7 +30,7 @@ class CreatureViewModel(
 
     fun updateCreature() {
         val attributes = CreatureAttributes(intelligence, strength, endurance)
-        creature = generator.generateCreature(attributes, name, drawable)
+        creature = generator.generateCreature(attributes, name.get() ?: "", drawable)
         creatureLiveData.postValue(creature)
     }
 
@@ -60,7 +61,11 @@ class CreatureViewModel(
     }
 
     fun canSaveCreature(): Boolean {
-        return intelligence != 0 && strength != 0 && endurance != 0 &&
-                name.isNotEmpty() && drawable != 0
+        val name = this.name.get()
+        name?.let {
+            return intelligence != 0 && strength != 0 && endurance != 0 &&
+                    name.isNotEmpty() && drawable != 0
+        }
+        return false
     }
 }

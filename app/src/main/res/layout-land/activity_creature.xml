@@ -93,6 +93,7 @@
         android:layout_margin="@dimen/dp_16"
         android:hint="@string/creature_name"
         android:inputType="text"
+        android:text="@={viewmodel.name}"
         app:layout_constraintBaseline_toBaselineOf="@+id/nameLabel"
         app:layout_constraintEnd_toStartOf="@+id/saveButton"
         app:layout_constraintStart_toEndOf="@+id/nameLabel"/>
