@@ -20,7 +20,7 @@ class RoomRepository : CreatureRepository {
         InsertAsyncTask(creatureDao).execute(creature)
     }
 
-    override fun getAllCreaatures(): LiveData<List<Creature>> = allCreatures
+    override fun getAllCreatures(): LiveData<List<Creature>> = allCreatures
 
     override fun clearAllCreatures() {
         val creatureArray = allCreatures.value?.toTypedArray()

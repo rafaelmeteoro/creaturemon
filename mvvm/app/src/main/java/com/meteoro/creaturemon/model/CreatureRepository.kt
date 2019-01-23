@@ -4,6 +4,6 @@ import android.arch.lifecycle.LiveData
 
 interface CreatureRepository {
     fun saveCreature(creature: Creature)
-    fun getAllCreaatures(): LiveData<List<Creature>>
+    fun getAllCreatures(): LiveData<List<Creature>>
     fun clearAllCreatures()
 }

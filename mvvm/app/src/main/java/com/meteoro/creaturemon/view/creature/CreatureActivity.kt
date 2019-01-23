@@ -5,8 +5,6 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -26,7 +24,7 @@ class CreatureActivity : AppCompatActivity(), AvatarAdapter.AvatarListener {
 
     private lateinit var viewModel: CreatureViewModel
 
-    lateinit var binding: ActivityCreatureBinding
+    private lateinit var binding: ActivityCreatureBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
