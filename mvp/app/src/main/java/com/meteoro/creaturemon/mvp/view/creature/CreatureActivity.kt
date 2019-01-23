@@ -11,11 +11,13 @@ import com.meteoro.creaturemon.mvp.R
 import com.meteoro.creaturemon.mvp.model.AttributeStore
 import com.meteoro.creaturemon.mvp.model.AttributeValue
 import com.meteoro.creaturemon.mvp.model.Avatar
+import com.meteoro.creaturemon.mvp.presenter.CreatureContract
 import com.meteoro.creaturemon.mvp.view.avatars.AvatarAdapter
 import com.meteoro.creaturemon.mvp.view.avatars.AvatarBottomDialogFragment
 import kotlinx.android.synthetic.main.activity_creature.*
 
-class CreatureActivity : AppCompatActivity(), AvatarAdapter.AvatarListener {
+class CreatureActivity : AppCompatActivity(), AvatarAdapter.AvatarListener,
+    CreatureContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,5 +100,13 @@ class CreatureActivity : AppCompatActivity(), AvatarAdapter.AvatarListener {
 
     private fun hideTapLabel() {
         tapLabel.visibility = View.INVISIBLE
+    }
+
+    override fun showHitPoints(hitPoints: String) {
+        this.hitPoints.text = hitPoints
+    }
+
+    override fun showAvatarDrawable(resourceId: Int) {
+        avatarImageView.setImageResource(resourceId)
     }
 }
