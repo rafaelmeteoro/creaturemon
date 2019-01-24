@@ -38,4 +38,26 @@ class CreaturePresenterTest {
 
         verify(view, times(1)).showHitPoints("50")
     }
+
+    @Test
+    fun testStrengthSelected() {
+        val attriutes = CreatureAttributes(0, 3, 0)
+        val stubCreature = Creature(attriutes, 9)
+        `when`(mockGenerator.generateCreature(attriutes)).thenReturn(stubCreature)
+
+        presenter.attributeSelected(AttributeType.STRENGTH, 1)
+
+        verify(view, times(1)).showHitPoints("9")
+    }
+
+    @Test
+    fun testEnduranceSelected() {
+        val attriutes = CreatureAttributes(0, 0, 7)
+        val stubCreature = Creature(attriutes, 28)
+        `when`(mockGenerator.generateCreature(attriutes)).thenReturn(stubCreature)
+
+        presenter.attributeSelected(AttributeType.ENDURANCE, 2)
+
+        verify(view, times(1)).showHitPoints("28")
+    }
 }
