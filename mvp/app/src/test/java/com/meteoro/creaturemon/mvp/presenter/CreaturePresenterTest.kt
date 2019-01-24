@@ -1,9 +1,6 @@
 package com.meteoro.creaturemon.mvp.presenter
 
-import com.meteoro.creaturemon.mvp.model.AttributeType
-import com.meteoro.creaturemon.mvp.model.Creature
-import com.meteoro.creaturemon.mvp.model.CreatureAttributes
-import com.meteoro.creaturemon.mvp.model.CreatureGenerator
+import com.meteoro.creaturemon.mvp.model.*
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -21,10 +18,13 @@ class CreaturePresenterTest {
     @Mock
     lateinit var mockGenerator: CreatureGenerator
 
+    @Mock
+    lateinit var mockRepository: CreatureRepository
+
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-        presenter = CreaturePresenter(mockGenerator)
+        presenter = CreaturePresenter(mockGenerator, mockRepository)
         presenter.setView(view)
     }
 
