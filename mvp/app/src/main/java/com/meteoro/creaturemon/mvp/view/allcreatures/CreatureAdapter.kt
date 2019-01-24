@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.meteoro.creaturemon.mvp.R
 import com.meteoro.creaturemon.mvp.app.inflate
 import com.meteoro.creaturemon.mvp.model.Creature
+import kotlinx.android.synthetic.main.list_item_creature.view.*
 
 class CreatureAdapter(private val creatures: MutableList<Creature>) :
     RecyclerView.Adapter<CreatureAdapter.ViewHolder>() {
@@ -32,7 +33,9 @@ class CreatureAdapter(private val creatures: MutableList<Creature>) :
 
         fun bind(creature: Creature) {
             this.creature = creature
-            // TODO: populate views
+            itemView.avatarListItem.setImageDrawable(itemView.context.getDrawable(creature.drawable))
+            itemView.name.text = creature.name
+            itemView.hitPoints.text = creature.hitPoints.toString()
         }
     }
 }

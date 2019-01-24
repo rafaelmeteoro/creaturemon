@@ -13,4 +13,5 @@
     <string name="creature_saved">Creature saved!</string>
     <string name="clear_all_creatures">Clear All Creatures</string>
     <string name="add_creature">Add Creature</string>
+    <string name="creatures_cleared">Creatures cleared.</string>
 </resources>
