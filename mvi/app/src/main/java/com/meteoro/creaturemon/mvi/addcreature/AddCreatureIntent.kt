@@ -1,0 +1,17 @@
+package com.meteoro.creaturemon.mvi.addcreature
+
+import com.meteoro.creaturemon.mvi.mvibase.MviIntent
+
+sealed class AddCreatureIntent : MviIntent {
+    data class AvatarIntent(val drawable: Int) : AddCreatureIntent()
+    data class NameIntent(val name: String) : AddCreatureIntent()
+    data class IntelligenceIntent(val intelligenceIndex: Int) : AddCreatureIntent()
+    data class StrengthIntent(val strengthIndex: Int) : AddCreatureIntent()
+    data class SaveIntent(
+        val drawable: Int,
+        val name: String,
+        val intelligenceIndex: Int,
+        val strengthIndex: Int,
+        val enduranceIndex: Int
+    ) : AddCreatureIntent()
+}
