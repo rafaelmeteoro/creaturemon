@@ -7,6 +7,7 @@ sealed class AddCreatureIntent : MviIntent {
     data class NameIntent(val name: String) : AddCreatureIntent()
     data class IntelligenceIntent(val intelligenceIndex: Int) : AddCreatureIntent()
     data class StrengthIntent(val strengthIndex: Int) : AddCreatureIntent()
+    data class EnduranceIntent(val enduranceIndex: Int) : AddCreatureIntent()
     data class SaveIntent(
         val drawable: Int,
         val name: String,
