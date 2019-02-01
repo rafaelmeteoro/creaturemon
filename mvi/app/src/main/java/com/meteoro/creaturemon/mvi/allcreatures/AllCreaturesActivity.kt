@@ -1,11 +1,13 @@
 package com.meteoro.creaturemon.mvi.allcreatures
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.meteoro.creaturemon.mvi.R
+import com.meteoro.creaturemon.mvi.addcreature.CreatureActivity
 import kotlinx.android.synthetic.main.activity_all_creatures.*
 import kotlinx.android.synthetic.main.content_all_creatures.*
 
@@ -21,7 +23,9 @@ class AllCreaturesActivity : AppCompatActivity() {
         creaturesRecyclerView.layoutManager = LinearLayoutManager(this)
         creaturesRecyclerView.adapter = adapter
 
-        fab.setOnClickListener { }
+        fab.setOnClickListener {
+            startActivity(Intent(this, CreatureActivity::class.java))
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

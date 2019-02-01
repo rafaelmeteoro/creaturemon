@@ -21,6 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".addcreature.CreatureActivity"
+            android:parentActivityName=".allcreatures.AllCreaturesActivity"/>
     </application>
 
 </manifest>
