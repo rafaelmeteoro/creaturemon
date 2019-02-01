@@ -1,23 +1,51 @@
 package com.meteoro.creaturemon.mvi.addcreature
 
 import androidx.lifecycle.ViewModel
+import com.meteoro.creaturemon.mvi.addcreature.AddCreatureAction.*
+import com.meteoro.creaturemon.mvi.addcreature.AddCreatureIntent.*
 import com.meteoro.creaturemon.mvi.addcreature.AddCreatureResult.*
 import com.meteoro.creaturemon.mvi.data.model.CreatureAttributes
 import com.meteoro.creaturemon.mvi.data.model.CreatureGenerator
 import com.meteoro.creaturemon.mvi.mvibase.MviViewModel
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
+import io.reactivex.subjects.PublishSubject
 
 class AddCreatureViewModel(
     private val actionProcessorHolder: AddCreatureProcessorHolder
 ) : ViewModel(), MviViewModel<AddCreatureIntent, AddCreatureViewState> {
 
+    private val intentsSubject: PublishSubject<AddCreatureIntent> = PublishSubject.create()
+    private val statesObservable: Observable<AddCreatureViewState> = compose()
+
     override fun processIntent(intents: Observable<AddCreatureIntent>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        intents.subscribe(intentsSubject)
     }
 
-    override fun states(): Observable<AddCreatureViewState> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun states(): Observable<AddCreatureViewState> = statesObservable
+
+    private fun compose(): Observable<AddCreatureViewState> {
+        return intentsSubject
+            .map(this::actionFromIntent)
+            .compose(actionProcessorHolder.actionProcessor)
+            .scan(AddCreatureViewState.default(), reducer)
+            .distinctUntilChanged()
+            .replay(1)
+            .autoConnect(0)
+    }
+
+    private fun actionFromIntent(intent: AddCreatureIntent): AddCreatureAction {
+        return when (intent) {
+            is AvatarIntent -> AvatarAction(intent.drawable)
+            is NameIntent -> NameAction(intent.name)
+            is IntelligenceIntent -> IntelligenceAction(intent.intelligenceIndex)
+            is StrengthIntent -> StrengthAction(intent.strengthIndex)
+            is EnduranceIntent -> EnduranceAction(intent.enduranceIndex)
+            is SaveIntent -> SaveAction(
+                intent.drawable, intent.name, intent.intelligenceIndex, intent.strengthIndex,
+                intent.enduranceIndex
+            )
+        }
     }
 
     companion object {
