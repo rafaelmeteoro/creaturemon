@@ -3,6 +3,8 @@ package com.meteoro.creaturemon.mvi.util
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.meteoro.creaturemon.mvi.addcreature.AddCreatureProcessorHolder
+import com.meteoro.creaturemon.mvi.addcreature.AddCreatureViewModel
 import com.meteoro.creaturemon.mvi.allcreatures.AllCreaturesProcessorHolder
 import com.meteoro.creaturemon.mvi.allcreatures.AllCreaturesViewModel
 import com.meteoro.creaturemon.mvi.app.Injection
@@ -17,6 +19,15 @@ class CreaturemonViewModelFactory private constructor(
             return AllCreaturesViewModel(
                 AllCreaturesProcessorHolder(
                     Injection.provideCreatureRepository(applicationContext),
+                    Injection.provideSchedulerProvider()
+                )
+            ) as T
+        }
+        if (modelClass == AddCreatureViewModel::class.java) {
+            return AddCreatureViewModel(
+                AddCreatureProcessorHolder(
+                    Injection.provideCreatureRepository(applicationContext),
+                    Injection.provideCreatureGenerator(),
                     Injection.provideSchedulerProvider()
                 )
             ) as T

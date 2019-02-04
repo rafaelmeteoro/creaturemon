@@ -94,7 +94,7 @@ class AllCreaturesActivity : AppCompatActivity(),
             creaturesRecyclerView.visible = false
             emptyState.visible = true
         } else {
-            creaturesRecyclerView.visible = false
+            creaturesRecyclerView.visible = true
             emptyState.visible = false
             adapter.updateCreatures(state.creatures)
         }
